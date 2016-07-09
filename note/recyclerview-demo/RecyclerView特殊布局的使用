@@ -1,3 +1,29 @@
-###使用RecyclerVicew实现图片中显示样式
+##使用RecyclerVicew实现以下显示样式
 
-![](https://github.com/Issacw0ng/SwipeBackLayout/blob/master/art/screenshot.png?raw=true)
+![](https://raw.githubusercontent.com/verybranch/AndroidNote/master/note/recyclerview-demo/ic_1.png)
+
+##轮播功能参考
+###[轮播LoopSwitchView](www.baidu.com)
+
+## 主要实现原理
+>RecyclerView 中的GridLayoutManager 可以实现网格布局，同时他也能自定义每个网格可以占用几个格子
+>
+>
+
+	private class DemoSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+
+    	@Override
+    	public int getSpanSize(int position) {
+      	//返回当前postition占用几个空格
+
+      	return 1;
+    	}
+  	}
+  	
+  	
+### 那么我们就可以定义三种ViewType
+> + 轮播图
+> + 宫格
+> + 列表流
+> 
+> 根据每种ViewType在上面	`getSpanSize(int position)`返回当前位置占用的格子数	
