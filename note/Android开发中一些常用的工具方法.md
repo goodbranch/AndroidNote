@@ -205,6 +205,53 @@ public static boolean isNumeric(String str) {
 
   }
 ```
+##10.得到当前设备名,例如，vivoX3,HUAWEIP7-L10
 
+```
+  private String getModel() {
+
+    String model = android.os.Build.MODEL;
+
+    if (model != null) {
+
+      model = model.trim().replaceAll("\\s*", "");
+    } else {
+
+      model = "";
+    }
+
+    return model;
+  }
+```
+
+## 11. 获取`AndroidManifest.xml` 中`meta`中的数据
+```
+   PackageManager packageManager = mContext.getPackageManager();
+   String packageName = mContext.getPackageName();
+   ApplicationInfo applicationInfo=packageManager
+   .getApplicationInfo(packageName,PackageManager.GET_META_DATA);
+   
+   applicationInfo.metaData.getXX(x,x);
+``` 
+## 12. 打开Apk文件进行安装
+```
+    Intent intent = new Intent();
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.setAction(android.content.Intent.ACTION_VIEW);
+    intent.setDataAndType(Uri.fromFile(file),
+        "application/vnd.android.package-archive");
+    context.startActivity(intent);
+```
+## 13.打开应用市场
+```
+     Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
+     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+     try {
+          //可能手机上没有安装应用市场
+          startActivity(entry.jumpIntent);
+         } catch (ActivityNotFoundException e) {
+           
+         }
+```
 
 ### 后续过程中再补充
