@@ -1,11 +1,8 @@
 ##一个可以无限循环的轮播LoopSwitchView
 
 ## 效果
-
-<video id="video" width="320" height="240" controls="" preload="none" poster="https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/LoopSwitch/Screenshot_2016-07-17-11-18-21.png">
-<source id="mp4" src="https://github.com/goodbranch/AndroidNote/blob/master/note/LoopSwitch/20160717-111134.mp4?raw=true  type="video/mp4">
-<p>Your user agent does not support the HTML5 Video element.</p>
-</video>
+![image](Screenshot_2016-07-17-11-18-21.png")
+![image](loopswitch.gif")
     
 ## 实现目标
 >* 可以手动左右滚动
