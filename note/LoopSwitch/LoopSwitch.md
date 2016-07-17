@@ -1,8 +1,11 @@
 ##一个可以无限循环的轮播LoopSwitchView
 
-## 效果
-![image](Screenshot_2016-07-17-11-18-21.png")
-![image](loopswitch.gif")
+## ScreenShot
+![image](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/LoopSwitch/Screenshot_2016-07-17-11-18-21.png)
+
+## GIF
+
+![image](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/LoopSwitch/loopswitch.gif)
     
 ## 实现目标
 >* 可以手动左右滚动
