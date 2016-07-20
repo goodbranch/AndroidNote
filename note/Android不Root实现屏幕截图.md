@@ -34,7 +34,7 @@
 >  
 >  这里必须使用`startActivityForResult` 因为在`createScreenCaptureIntent()` 方法中会返回用户授权截取屏幕的结果，用户根据下面弹窗允许或者拒绝
 
->  ![授权](screenshot\screenshot_permission.png)
+>  ![授权](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/screenshot/screenshot_permission.png)
 >
 >  用户选择后在Activity 的`onActivityResult` 中操作返回的结果data
 >
@@ -118,9 +118,12 @@
         mImageReader.getSurface(), null, null);
  	 }
 >
->#### 最后把`mImageReader`得到的屏幕内容数据转换成图片
->
->##### 在AsyncTask中处理
+>#### 最后把`mImageReader`得到的屏幕内容数据转换成图片,在AsyncTask中处理,
+>##### `Image.Plane`中的 buffer 数据并不是完全是Bitmap所需要的，需要注意下面3点
+
+>###### 1. Image 设置的图片格式与Bitmap设置的必须一致
+>###### 2. 缓冲数据存在行间距，所以我们必须去除这些间距
+>###### 3. Image 使用后必须调用`image.close();`关闭，否则再次使用会报错
 >
 >     @Override
 >  	  protected Bitmap doInBackground(Image... params) {
@@ -132,11 +135,13 @@
 >
 >      	Image image = params[0];
 >
->     	 int width = image.getWidth();
->     	 int height = image.getHeight();
->     	 final Image.Plane[] planes = image.getPlanes();
+>     	int width = image.getWidth();
+>     	int height = image.getHeight();
+>     	final Image.Plane[] planes = image.getPlanes();
 >      	final ByteBuffer buffer = planes[0].getBuffer();
+        //每个像素的间距
 >      	int pixelStride = planes[0].getPixelStride();
+        //总的间距
 >      	int rowStride = planes[0].getRowStride();
 >      	int rowPadding = rowStride - pixelStride * width;
 >      	Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
@@ -147,7 +152,8 @@
 >
 >##### 最后把生成的bitmap保存起来，就ok了
 >
+>###[源码](https://github.com/goodbranch/ScreenCapture)
 >
->
+>###[APK](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/screenshot/ScreenCapture.apk)
 >
 >
