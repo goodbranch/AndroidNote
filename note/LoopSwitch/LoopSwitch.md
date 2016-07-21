@@ -124,4 +124,6 @@
     
  
  
-###[demo](https://github.com/goodbranch/LoopSwitch)
+>###[源码](https://github.com/goodbranch/LoopSwitch)
+
+>###[APK](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/Apk/LoopSwitch.apk)
