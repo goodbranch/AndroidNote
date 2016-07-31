@@ -7,5 +7,6 @@
 ### [4.Android不Root实现屏幕截图](note/Android不Root实现屏幕截图.md)
 ### [5.开发调试必备Fiddler](note/开发调试必备Fiddler.md)
 ### [6.Android6.0及以上权限处理](note/Android6.0及以上权限处理.md)
+### [7.Android 媒体库图片，音频，视频，文件的查询](note/Android 媒体库图片，音频，视频，文件的查询.md)
 
 
