@@ -2,15 +2,16 @@
 
 ### `AsyncTaskLoader` 是在Android 3.0加入了，需要兼容更低版本可以使用V4包，`AsyncTaskLoader`只能在`Fragment` 和 `Activity`上使用，并且生命周期跟随`Activity`的`onStart()`，`onStop()`和`onDestory()`，内部线程使用`AsyncTask`和 v4包中使用`ModernAsyncTask`,如果使用的`AsyncTask`默认`Executor` 不会是的`SERIAL_EXECUTOR`（一次只能执行一个任务）。
 
-#### 1.为什么推荐使用AsyncTask
+#### 1.AsyncTaskLoader的优缺点
 >
->使用`AsyncTask`执行数据请求，如果当前在Activity关闭后还没有执行完成，那么Activity的就会被持有，因而导致内存泄漏,内存也不能得到及时的清理，通常我们的做法是在Activity或者Fragment中的`onDestory()`方法中做一些数据清理工作，以及引用持有的清理工作，而`AsyncTaskLoader` 则会帮我们处理好这些。
+>优点：使用`AsyncTask`执行数据请求，如果当前在Activity关闭后还没有执行完成，那么Activity的就会被持有，因而导致内存泄漏,内存也不能得到及时的清理，通常我们的做法是在`Activity`或者`Fragment`中的`onDestory()`方法中做一些数据清理工作，以及引用持有的清理工作，而`AsyncTaskLoader` 则会帮我们处理好这些。
 >
 >
-#### 2.AsyncTaskLoader的实现原理
+>缺点：我们只能在`Activity`或者`Fragment`中使用，并且不能使用`AsyncTask`的progress
 >
->`AsyncTaskLoader`最终通过`LoaderManager` 进行生命周期管理，数据分发以及回调，在`Activity`中有一个`LoaderManager`mLoaderManager实例，我们在`Activity`或者`Fragment` 中调用`getLoaderManager()`就会创建出这个实例。
+#### 2.Loader生命周期管理
 >
+>`AsyncTaskLoader`最终通过`LoaderManager` 进行生命周期管理，数据分发以及回调，在`Activity`中有一个`LoaderManager` `mLoaderManager`实例，我们在`Activity`或者`Fragment` 中调用`getLoaderManager()`就会创建出这个实例。
 >`mLoaderManager`在Activity中生命周期的管理分别是：
 
 > 1. `onStart()`
@@ -62,7 +63,7 @@
 	        }
 	    }
 
-#### 3.如何使用`AsyncTaskLoader`
+#### 3.使用`AsyncTaskLoader`
 >
 > 在Activity中实现`LoaderManager.LoaderCallbacks<D>`
 >
