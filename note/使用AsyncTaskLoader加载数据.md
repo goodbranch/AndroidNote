@@ -4,14 +4,15 @@
 
 #### 1.AsyncTaskLoader的优缺点
 >
->优点：使用`AsyncTask`执行数据请求，如果当前在Activity关闭后还没有执行完成，那么Activity的就会被持有，因而导致内存泄漏,内存也不能得到及时的清理，通常我们的做法是在`Activity`或者`Fragment`中的`onDestory()`方法中做一些数据清理工作，以及引用持有的清理工作，而`AsyncTaskLoader` 则会帮我们处理好这些。
+>优点：使用`AsyncTask`执行数据请求，如果当前在Activity关闭后还没有执行完成，那么Activity的就会被持有，因而导致内存泄漏,通常我们的做法是在`Activity`或者`Fragment`中的`onDestory()`方法中做一些数据清理工作，以及引用持有的清理工作，而`AsyncTaskLoader` 有生命周期的管理则会帮我们处理好这些。
 >
 >
 >缺点：我们只能在`Activity`或者`Fragment`中使用，并且不能使用`AsyncTask`的progress
 >
 #### 2.Loader生命周期管理
 >
->`AsyncTaskLoader`最终通过`LoaderManager` 进行生命周期管理，数据分发以及回调，在`Activity`中有一个`LoaderManager` `mLoaderManager`实例，我们在`Activity`或者`Fragment` 中调用`getLoaderManager()`就会创建出这个实例。
+>`AsyncTaskLoader`最终通过`LoaderManager` 进行生命周期管理，数据分发以及回调，在`Activity`中有一个`LoaderManager` `mLoaderManager`实例，我们在`Activity`或者`Fragment` 中调用`getLoaderManager()`创建出这个实例。
+
 >`mLoaderManager`在Activity中生命周期的管理分别是：
 
 > 1. `onStart()`
@@ -65,17 +66,18 @@
 
 #### 3.使用`AsyncTaskLoader`
 >
-> 在Activity中实现`LoaderManager.LoaderCallbacks<D>`
+>##### 1. 在Activity中实现`LoaderManager.LoaderCallbacks<D>`
 >
 >	`public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ApplicationInfo>> { `
 
 >
-> 实现三个方法：
+>##### 2. 实现三个方法：
 >
 >
 >
 
-		@Override
+
+		 @Override
 		  public Loader<List<ApplicationInfo>> onCreateLoader(int id, Bundle args) {
 
 		    //args 是getSupportLoaderManager().initLoader传过来的数据
@@ -90,16 +92,9 @@
 
 		    Log.e("branch", "onLoadFinished-》 " + data);
 
+		    mListApps = data;
 
-		    if (data != null) {
-
-		      for (ApplicationInfo info : data) {
-
-		        Log.e("branch_app", "" + info.name + " | " + info.packageName);
-
-		      }
-
-		    }
+		    mApplistAdapter.notifyDataSetChanged();
 
 		    if (progressDialog != null) {
 		      progressDialog.dismiss();
@@ -113,12 +108,13 @@
 		    if (progressDialog != null) {
 		      progressDialog.dismiss();
 		    }
-		  }
 
+		    mListApps = null;
+		    mApplistAdapter.notifyDataSetChanged();
+
+		  }
 >
-> 在`onCreateLoader` 方法中创建我们的Loader。
->
->通常我们在Activity的onCreate()方法中调用Loader init 方法，如
+> 在`onCreateLoader` 方法中创建我们的Loader，在Activity的onCreate()或者其他地方调用方法中调用Loader init 方法，如
 
 
 
@@ -143,7 +139,17 @@
 		  }
 
 
->
+> 当你想放弃上一次的数据是，可以使用`getLoaderManager().restartLoader(0, null, this);`
+
+		public boolean onTextChanged(String newText) {
+		    // Called when the action bar search text has changed.  Update
+		    // the search filter, and restart the loader to do a new query
+		    // with this filter.
+		    getLoaderManager().restartLoader(0, null, this);
+		    return true;
+		}
+
+
 >这样写完我们的Loader就开始加载数据了
 
 #### 4.AppListLoader的实现
