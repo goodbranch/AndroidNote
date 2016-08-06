@@ -12,29 +12,30 @@
 #### 2.Loader生命周期管理
 >
 >`AsyncTaskLoader`最终通过`LoaderManager` 进行生命周期管理，数据分发以及回调，在`Activity`中有一个`LoaderManager` `mLoaderManager`实例，我们在`Activity`或者`Fragment` 中调用`getLoaderManager()`创建出这个实例。
-
 >`mLoaderManager`在Activity中生命周期的管理分别是：
+>
 
-> 1. `onStart()`
+1.`onStart()`
 
-	  protected void onStart() {
-	        if (DEBUG_LIFECYCLE) Slog.v(TAG, "onStart " + this);
-	        mCalled = true;
 
-	        if (!mLoadersStarted) {
-	            mLoadersStarted = true;
-	            if (mLoaderManager != null) {
-	                mLoaderManager.doStart();
-	            } else if (!mCheckedForLoaderManager) {
-	                mLoaderManager = getLoaderManager("(root)", mLoadersStarted, false);
-	            }
-	            mCheckedForLoaderManager = true;
-	        }
+		protected void onStart() {
+         if (DEBUG_LIFECYCLE) Slog.v(TAG, "onStart " + this);
+         mCalled = true;
 
-	        getApplication().dispatchActivityStarted(this);
-	    }
+        if (!mLoadersStarted) {
+            mLoadersStarted = true;
+            if (mLoaderManager != null) {
+                mLoaderManager.doStart();
+            } else if (!mCheckedForLoaderManager) {
+                mLoaderManager = getLoaderManager("(root)", mLoadersStarted, false);
+            }
+            mCheckedForLoaderManager = true;
+        }
 
-  2.`performStop()`
+        getApplication().dispatchActivityStarted(this);
+    	}
+
+2.`performStop()`
 
 	   final void performStop() {
 	        mDoReportFullyDrawn = false;
