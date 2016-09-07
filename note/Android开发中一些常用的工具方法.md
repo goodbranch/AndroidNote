@@ -254,4 +254,23 @@ public static boolean isNumeric(String str) {
          }
 ```
 
+## 14.调用系统方式分享文件
+
+     public static void videoShare(Activity activity, String videoPath, int requestcode) {
+
+        if (TextUtils.isEmpty(videoPath)) {
+          return;
+        }
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("video/*");  //image/*
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(videoPath)));
+
+        activity.startActivityForResult(Intent.createChooser(intent, activity.getString(R.string.share_text)), requestcode);
+      }
+
+更多分享可以查看官方介绍：
+
+![Intent 分享源码介绍](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/systemShare/intent-1.png)
+
 ### 后续过程中再补充
