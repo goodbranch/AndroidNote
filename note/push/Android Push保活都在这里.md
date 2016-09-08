@@ -81,51 +81,53 @@
 
 Android早期的版本这种方式可以很好保证进程不被杀死。
 
+
+
 * Activity模拟前端进程，4.3以上空Notification方式被修复了，这样设置已经没有用了，那么定义一个一像素大小全透明的Activity，在屏幕关闭后启动，屏幕打开是关闭，同时把他从最近进程列表中移除。
 
-	 public class DaemonActivity extends FragmentActivity {
+		 public class DaemonActivity extends FragmentActivity {
 
-	  public static final String CLOSE_ACTION = "close";
+		  public static final String CLOSE_ACTION = "close";
 
-	  private static Intent newIntent(Context context) {
-	    Intent intent = new Intent(context, DaemonActivity.class);
-	    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	    return intent;
-	  }
-
-
-	  public static void startActivity(Context context) {
-
-	    if (!mStart) {
-	      context.startActivity(newIntent(context));
-	    }
-	  }
+		  private static Intent newIntent(Context context) {
+		    Intent intent = new Intent(context, DaemonActivity.class);
+		    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		    return intent;
+		  }
 
 
-	  public static boolean mStart = false;
+		  public static void startActivity(Context context) {
 
-	  @Override
-	  protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    EventBus.getDefault().register(this);
+		    if (!mStart) {
+		      context.startActivity(newIntent(context));
+		    }
+		  }
 
-	    mStart = true;
 
-	    View view = new View(getApplicationContext());
-	    view.setLayoutParams(new ViewGroup.LayoutParams(1, 1));
+		  public static boolean mStart = false;
 
-	    setContentView(view);
+		  @Override
+		  protected void onCreate(Bundle savedInstanceState) {
+		    super.onCreate(savedInstanceState);
+		    EventBus.getDefault().register(this);
 
-	    view.setOnTouchListener(new View.OnTouchListener() {
-	      @Override
-	      public boolean onTouch(View v, MotionEvent event) {
-	        finish();
-	        return true;
-	      }
-	    });
+		    mStart = true;
 
-	    setFinish();
-	  }
+		    View view = new View(getApplicationContext());
+		    view.setLayoutParams(new ViewGroup.LayoutParams(1, 1));
+
+		    setContentView(view);
+
+		    view.setOnTouchListener(new View.OnTouchListener() {
+		      @Override
+		      public boolean onTouch(View v, MotionEvent event) {
+		        finish();
+		        return true;
+		      }
+		    });
+
+		    setFinish();
+		  }
 
 设置不会在最近列表中和历史记录中显示：
 
