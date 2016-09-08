@@ -264,7 +264,7 @@ Android早期的版本这种方式可以很好保证进程不被杀死。
 
 ## 利用第三方Push
 
-关于第三方Push可以先看下我上一篇文章：[JPush，友盟，百度云，个推Push服务在保活上的对比](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/JPush，友盟，百度云，个推Push服务在保活上的对比.md)
+关于第三方Push可以先看下我上一篇文章：[JPush，友盟，百度云，个推Push服务在保活上的对比](https://github.com/goodbranch/AndroidNote/blob/master/note/JPush%EF%BC%8C%E5%8F%8B%E7%9B%9F%EF%BC%8C%E7%99%BE%E5%BA%A6%E4%BA%91%EF%BC%8C%E4%B8%AA%E6%8E%A8Push%E6%9C%8D%E5%8A%A1%E5%9C%A8%E4%BF%9D%E6%B4%BB%E4%B8%8A%E7%9A%84%E5%AF%B9%E6%AF%94.md)
 
 * 极光Push
 
