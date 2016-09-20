@@ -49,9 +49,7 @@
 	        }
 	    };
 
-
     然后在`Downsampler`中的`decode`方法中，获取的Bitmap大小变成1/sampleSize，倍数通过`getSampleSize`计算所得，
-
 
             options.inTempStorage = bytesForOptions;
 
@@ -83,9 +81,7 @@
                 }
             }
 
-
     inSampleSize 是 BitmapFactory.Options的属性，应该大家都知道。然后再看看怎么生成`.override(200,200)`，如果没有设置Glide默认是`FitCenter`，查看`FitCenter`可以看到图片截取方式。
-
 
 		public class FitCenter extends BitmapTransformation {
 
@@ -107,7 +103,7 @@
 		        return "FitCenter.com.bumptech.glide.load.resource.bitmap";
 		    }
 		}
-
+   
     --
 
 		 public static Bitmap fitCenter(Bitmap toFit, BitmapPool pool, int width, int height) {
@@ -164,7 +160,6 @@
 		        final float heightPercentage = height / (float) toFit.getHeight();
 		        final float minPercentage = Math.min(widthPercentage, heightPercentage);
 
-
     测试中我们使用的图片是1080x540,最终生成了200x100.设置`approximate()`对应`Downsampler.AT_LEAST`,`asIs()`对应`Downsampler.NONE`,`atMost()`对应`Downsampler.AT_MOST`，具体情况可查看`Downsampler`
 
 
@@ -209,24 +204,19 @@
 			    }
 			}
 
-
     查看本地缓存如下：
 
     ![DiskCacheStrategy](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/glide/glide-DiskCacheStrategy-1.png)
-
 
     如果图片需要分享或需要原图的建议缓存`ALL`，否则只缓存`RESULT`。
 
 * ### Glide全局配置
 
-
 1. **创建`GlideModel`**
-
 
 		public class GlideConfigModule implements GlideModule {
 		  @Override
 		  public void applyOptions(Context context, GlideBuilder builder) {
-
 
 		  }
 
@@ -306,7 +296,6 @@
 
     		builder.setBitmapPool(new LruBitmapPool(sizeInBytes));
 
-
     或实现`BitmapPool`自定义一个吧。
 
     Glide所有的基本配置都在`GlideModule`内，使用Glide提供的缓存方式如下：
@@ -321,41 +310,41 @@
 
 * ### 自定义加载
 
-1. **SimpleTarget**
-   
-    如果单纯的想获得Bitmap，显不显示或者其他再定，则可以使用`SimpleTarget`
-
-	     Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg")
-	          .asBitmap()
-	          .diskCacheStrategy(DiskCacheStrategy.ALL)
-	          .into(new SimpleTarget<Bitmap>() {
-	            @Override
-	            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
-	            }
-	          });
-
-	需要注意的是如果你想获取Bitmap那么一定不想因为`Activity`,`Fragment`的生命周期影响，因此`Glide.with(context)`使用Context,同时为了避免内存泄露建议`SimpleTarget`使用静态内部类而不是内部类（静态内部类不持有外部引用）。
-
-2. **ViewTarget**
-
-    如果想要在图片加载完成后设置一些动画则可以使用`ViewTarget`
+	1. **SimpleTarget**
+	   
+	    如果单纯的想获得Bitmap，显不显示或者其他再定，则可以使用`SimpleTarget`
 
 		     Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg")
 		          .asBitmap()
-		          .override(500,500)
 		          .diskCacheStrategy(DiskCacheStrategy.ALL)
-		          .into(new ViewTarget<ImageView, Bitmap>(mImageView) {
+		          .into(new SimpleTarget<Bitmap>() {
 		            @Override
 		            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
 
-		              this.view.setImageBitmap(resource);
 		            }
 		          });
-		    
-    如果`.asGif()`使用`GlideDrawable `替换`Bitmap`，同时`ViewTarget`中包含`onStart()`, `onStop()`, `onDestroy()`生命周期回调。
 
-    如果想要继续保留默认的特性可以相应的使用`GlideDrawableImageViewTarget`在`asGif()`之后，使用`BitmapImageViewTarget `在`asBitmap()`之后。
+		需要注意的是如果你想获取Bitmap那么一定不想因为`Activity`,`Fragment`的生命周期影响，因此`Glide.with(context)`使用Context,同时为了避免内存泄露建议`SimpleTarget`使用静态内部类而不是内部类（静态内部类不持有外部引用）。
+
+	2. **ViewTarget**
+
+	    如果想要在图片加载完成后设置一些动画则可以使用`ViewTarget`
+
+			     Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg")
+			          .asBitmap()
+			          .override(500,500)
+			          .diskCacheStrategy(DiskCacheStrategy.ALL)
+			          .into(new ViewTarget<ImageView, Bitmap>(mImageView) {
+			            @Override
+			            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
+			              this.view.setImageBitmap(resource);
+			            }
+			          });
+			    
+	    如果`.asGif()`使用`GlideDrawable `替换`Bitmap`，同时`ViewTarget`中包含`onStart()`, `onStop()`, `onDestroy()`生命周期回调。
+
+	    如果想要继续保留默认的特性可以相应的使用`GlideDrawableImageViewTarget`在`asGif()`之后，使用`BitmapImageViewTarget `在`asBitmap()`之后。
 
 * ### 自定义url
 
@@ -400,39 +389,38 @@
 
 * ### <span id="getBitmap">在后台线程下载</span>
 
-1. **downloadOnly**
+	1. **downloadOnly**
 
-    `downloadOnly`有异步版和同步版，如果已经在后台线程中执行必须同步版
+	    `downloadOnly`有异步版和同步版，如果已经在后台线程中执行必须同步版
 
-		    FutureTarget<File> future = Glide.with(applicationContext)
-		    .load(yourUrl)
-		    .downloadOnly(500, 500);
-		    File cacheFile = future.get();
+			    FutureTarget<File> future = Glide.with(applicationContext)
+			    .load(yourUrl)
+			    .downloadOnly(500, 500);
+			    File cacheFile = future.get();
 
-    这种方式在主线程中会阻塞主线程。如果想要在主线程中执行可以使用前面讲到的`SimpleTarget`
+	    这种方式在主线程中会阻塞主线程。如果想要在主线程中执行可以使用前面讲到的`SimpleTarget`
 
-	        Glide.with(this)
-	          .load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg")
-	          .downloadOnly(new SimpleTarget<File>() {
-	            @Override
-	            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
+		        Glide.with(this)
+		          .load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg")
+		          .downloadOnly(new SimpleTarget<File>() {
+		            @Override
+		            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
 
-	            }
-	          });
+		            }
+		          });
 
-2. **into**
+	2. **into**
 
-    使用into可以用于下载，下面是在后台线程中的使用：
+	    使用into可以用于下载，下面是在后台线程中的使用：
 
-		    Bitmap myBitmap = Glide.with(applicationContext)
-		    .load(yourUrl)
-		    .asBitmap()
-		    .centerCrop()
-		    .into(500, 500)
-		    .get()
+			    Bitmap myBitmap = Glide.with(applicationContext)
+			    .load(yourUrl)
+			    .asBitmap()
+			    .centerCrop()
+			    .into(500, 500)
+			    .get()
 
-
-    如果想在主线程中使用同样可以使用`SimpleTarget`
+	    如果想在主线程中使用同样可以使用`SimpleTarget`
 
 * ### 清除缓存
 
@@ -444,79 +432,78 @@
 
     有时我们并不是想要清理所有缓存，只是app版本变动则原来的缓存可能不需要了，或本地图片库中图片变更但是文件名地址没有变则可能就出现继续使用原来的缩略图或`.override(200,200)`使用的小图，其实最好的情况是如果数据变更则相应的改变url，如果不改变可以使用`StringSignature`解决这个问题.
 
-1. **通过版本使缓存失效**
+	1. **通过版本使缓存失效**
 
-		Glide.with(yourFragment)
-		    .load(yourFileDataModel)
-		    .signature(new StringSignature(yourVersionMetadata))
-		    .into(yourImageView);
+			Glide.with(yourFragment)
+			    .load(yourFileDataModel)
+			    .signature(new StringSignature(yourVersionMetadata))
+			    .into(yourImageView);
 
-2. **`MediaStore`中的数据**
+	2. **`MediaStore`中的数据**
 
-		Glide.with(fragment)
-		    .load(mediaStoreUri)
-		    .signature(new MediaStoreSignature(mimeType, dateModified, orientation))
-		    .into(view);
+			Glide.with(fragment)
+			    .load(mediaStoreUri)
+			    .signature(new MediaStoreSignature(mimeType, dateModified, orientation))
+			    .into(view);
 
-3. **自定义**
+	3. **自定义**
 
-    实现`Key`接口，重写`equals()`, `hashCode()` 和 `updateDiskCacheKey()` 方法，可以参考`StringSignature`或`MediaStoreSignature`的实现。
+	    实现`Key`接口，重写`equals()`, `hashCode()` 和 `updateDiskCacheKey()` 方法，可以参考`StringSignature`或`MediaStoreSignature`的实现。
 
 
 * ### Transformations
 
-1. **默认的Transformations**
+	1. **默认的Transformations**
 
-    **Fit center**
+	    **Fit center**
 
-    相当于Android's `ScaleType.FIT_CENTER.`
+	    相当于Android's `ScaleType.FIT_CENTER.`
 
-		    Glide.with(yourFragment)
-		    .load(yourUrl)
-		    .fitCenter()
-		    .into(yourView);
+			    Glide.with(yourFragment)
+			    .load(yourUrl)
+			    .fitCenter()
+			    .into(yourView);
 
-    **Center crop**
+	    **Center crop**
 
-    相当于Android's `ScaleType.CENTER_CROP`
+	    相当于Android's `ScaleType.CENTER_CROP`
 
-		    Glide.with(yourFragment)
-		    .load(yourUrl)
-		    .centerCrop()
-		    .into(yourView);
+			    Glide.with(yourFragment)
+			    .load(yourUrl)
+			    .centerCrop()
+			    .into(yourView);
 
+	2. **自定义transformations**
 
-2. **自定义transformations**
+	    最简单的方式是集成`BitmapTransformation`
 
-    最简单的方式是集成`BitmapTransformation`
+			    private static class MyTransformation extends BitmapTransformation {
 
-		    private static class MyTransformation extends BitmapTransformation {
+			    public MyTransformation(Context context) {
+			       super(context);
+			    }
 
-		    public MyTransformation(Context context) {
-		       super(context);
-		    }
+			    @Override
+			    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, 
+			            int outWidth, int outHeight) {
+			       Bitmap myTransformedBitmap = ... // apply some transformation here.
+			       return myTransformedBitmap;
+			    }
 
-		    @Override
-		    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, 
-		            int outWidth, int outHeight) {
-		       Bitmap myTransformedBitmap = ... // apply some transformation here.
-		       return myTransformedBitmap;
-		    }
+			    @Override
+			    public String getId() {
+			        // Return some id that uniquely identifies your transformation.
+			        return "com.example.myapp.MyTransformation";
+			    }
+			    }
+	    
+	    然后使用
 
-		    @Override
-		    public String getId() {
-		        // Return some id that uniquely identifies your transformation.
-		        return "com.example.myapp.MyTransformation";
-		    }
-		    }
-    
-    然后使用
+	    `.transform(new MyTransformation(context))`
 
-    `.transform(new MyTransformation(context))`
+	    [Transformations](https://github.com/wasabeef/glide-transformations) 有各种丰富的效果。
 
-    [Transformations](https://github.com/wasabeef/glide-transformations) 有各种丰富的效果。
-
-    `BitmapTransformation`可以用于改变bitmap形状，颜色，截取，放大，所有等操作。
+	    `BitmapTransformation`可以用于改变bitmap形状，颜色，截取，放大，所有等操作。
 
 * ### 设置占位图和加载错误图
 
@@ -534,90 +521,89 @@
 
 * ### 相关问题问答
 
-1. **[通过url获取已经下载的图片](#getBitmap)**
+	1. **[通过url获取已经下载的图片](#getBitmap)**
 
-    使用`downloadOnly`或`into`
+	    使用`downloadOnly`或`into`
 
-2. **是否支持Webp**
-   
-    Android 4.0 以上能支持
+	2. **是否支持Webp**
+	   
+	    Android 4.0 以上能支持
 
+	3. **在`AndroidManifest.xml`的`meta-data`配置`GlideModule`是如何获取的**
 
-3. **在`AndroidManifest.xml`的`meta-data`配置`GlideModule`**是如何获取的
+	    查看源码在`Glide.get(Context)`
 
-    查看源码可以在`Glide.get(Context)`
+			     public static Glide get(Context context) {
+			    if (glide == null) {
+			      synchronized (Glide.class) {
+			        if (glide == null) {
+			          Context applicationContext = context.getApplicationContext();
+			          List<GlideModule> modules = new ManifestParser(applicationContext).parse();
 
-		     public static Glide get(Context context) {
-		    if (glide == null) {
-		      synchronized (Glide.class) {
-		        if (glide == null) {
-		          Context applicationContext = context.getApplicationContext();
-		          List<GlideModule> modules = new ManifestParser(applicationContext).parse();
-
-		          GlideBuilder builder = new GlideBuilder(applicationContext);
-		          for (GlideModule module : modules) {
-		            module.applyOptions(applicationContext, builder);
-		          }
-		          glide = builder.createGlide();
-		          for (GlideModule module : modules) {
-		            module.registerComponents(applicationContext, glide.registry);
-		          }
-		        }
-		      }
-		    }
-
-		    return glide;
-		  }
-
-    可以看到`GlideModule`的获取在`ManifestParser`同时也发现可以设置多个，不过同样的配置后面的会覆盖前面的。那么进入`ManifestParser`查看是怎么实现的。
-
-			public final class ManifestParser {
-			  private static final String GLIDE_MODULE_VALUE = "GlideModule";
-
-			  private final Context context;
-
-			  public ManifestParser(Context context) {
-			    this.context = context;
-			  }
-
-			  public List<GlideModule> parse() {
-			    List<GlideModule> modules = new ArrayList<>();
-			    try {
-			      ApplicationInfo appInfo = context.getPackageManager()
-			          .getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-			      if (appInfo.metaData != null) {
-			        for (String key : appInfo.metaData.keySet()) {
-			          if (GLIDE_MODULE_VALUE.equals(appInfo.metaData.get(key))) {
-			            modules.add(parseModule(key));
+			          GlideBuilder builder = new GlideBuilder(applicationContext);
+			          for (GlideModule module : modules) {
+			            module.applyOptions(applicationContext, builder);
+			          }
+			          glide = builder.createGlide();
+			          for (GlideModule module : modules) {
+			            module.registerComponents(applicationContext, glide.registry);
 			          }
 			        }
 			      }
-			    } catch (PackageManager.NameNotFoundException e) {
-			      throw new RuntimeException("Unable to find metadata to parse GlideModules", e);
 			    }
 
-			    return modules;
+			    return glide;
 			  }
 
-			  private static GlideModule parseModule(String className) {
-			    Class<?> clazz;
-			    try {
-			      clazz = Class.forName(className);
-			    } catch (ClassNotFoundException e) {
-			      throw new IllegalArgumentException("Unable to find GlideModule implementation", e);
-			    }
+	    可以看到`GlideModule`的获取在`ManifestParser`同时也发现可以设置多个，不过同样的配置后面的会覆盖前面的。那么进入`ManifestParser`查看是怎么实现的。
 
-			    Object module;
-			    try {
-			      module = clazz.newInstance();
-			    } catch (InstantiationException | IllegalAccessException e) {
-			      throw new RuntimeException("Unable to instantiate GlideModule implementation for " + clazz,
-			          e);
-			    }
+				public final class ManifestParser {
+				  private static final String GLIDE_MODULE_VALUE = "GlideModule";
 
-			    if (!(module instanceof GlideModule)) {
-			      throw new RuntimeException("Expected instanceof GlideModule, but found: " + module);
-			    }
-			    return (GlideModule) module;
-			  }
-			}
+				  private final Context context;
+
+				  public ManifestParser(Context context) {
+				    this.context = context;
+				  }
+
+				  public List<GlideModule> parse() {
+				    List<GlideModule> modules = new ArrayList<>();
+				    try {
+				      ApplicationInfo appInfo = context.getPackageManager()
+				          .getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+				      if (appInfo.metaData != null) {
+				        for (String key : appInfo.metaData.keySet()) {
+				          if (GLIDE_MODULE_VALUE.equals(appInfo.metaData.get(key))) {
+				            modules.add(parseModule(key));
+				          }
+				        }
+				      }
+				    } catch (PackageManager.NameNotFoundException e) {
+				      throw new RuntimeException("Unable to find metadata to parse GlideModules", e);
+				    }
+
+				    return modules;
+				  }
+
+				  private static GlideModule parseModule(String className) {
+				    Class<?> clazz;
+				    try {
+				      clazz = Class.forName(className);
+				    } catch (ClassNotFoundException e) {
+				      throw new IllegalArgumentException("Unable to find GlideModule implementation", e);
+				    }
+
+				    Object module;
+				    try {
+				      module = clazz.newInstance();
+				    } catch (InstantiationException | IllegalAccessException e) {
+				      throw new RuntimeException("Unable to instantiate GlideModule implementation for " + clazz,
+				          e);
+				    }
+
+				    if (!(module instanceof GlideModule)) {
+				      throw new RuntimeException("Expected instanceof GlideModule, but found: " + module);
+				    }
+				    return (GlideModule) module;
+				  }
+				}
