@@ -162,7 +162,6 @@
 
     测试中我们使用的图片是1080x540,最终生成了200x100.设置`approximate()`对应`Downsampler.AT_LEAST`,`asIs()`对应`Downsampler.NONE`,`atMost()`对应`Downsampler.AT_MOST`，具体情况可查看`Downsampler`
 
-
  * #### 图片缓存策略
 
     测试加载的图片大小为1080x540，如果使用了`.override(200,200)`默认缓存一张200x100的图片,也就是默认存储结果`RESULT`，如果想要改变缓存的策略可以这样设置：
