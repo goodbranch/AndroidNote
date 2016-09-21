@@ -12,5 +12,5 @@
 ### [9.Android WebView的简单使用](note/webview/Android WebView的简单使用.md)
 ### [10.Android 进程保活都在这里](note/push/Android 进程保活都在这里.md)
 ### [11.Glide使用](note/glide/Glide使用.md)
-
+### [12.gradle task删除log日志](note/log/gradle task删除log日志.md)
 
