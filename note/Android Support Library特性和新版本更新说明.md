@@ -46,7 +46,7 @@ V4包是我们用的最广的，他支持从Android 1.6(API level 4)开始，他
 
 ##### 2.Multidex Support Library
 --
-> 当我们的工程项目在打包成应用是如果应用项目方法超过65536时则会报错，这时我们需要使用`Multidex Support Library`把应用打包分成多个DEX文件，使用方法如下：
+> Android项目方法超过65536时则会报错，无法编译，这时我们需要使用`Multidex Support Library`把应用打包分成多个DEX文件，才能解决，使用方法如下：
  `com.android.support:multidex:1.0.0` 然后在我们自己的`xxApplication extends MultidexApplication` 就OK了。
 
 ##### 3.v7 Support Libraries
@@ -60,8 +60,8 @@ v7支持包中包含了一些library，他们的Android使用版本最低 Androi
 
 > 下面是v7 appcompat library中关键的一些类：
 
-> + [ActionBar]()-
-+ [AppCompatActivity]()-实现了v7 appcompat action bar UI设计，可以作为基类的Activity
+> + [ActionBar]()- 通用的顶部导航栏
++ [AppCompatActivity]()-实现了v7 appcompat action bar， UI设计，可以作为基类的Activity
 + [AppCompatDialog]()-实现了AppCompat themed 可以用作基类的Dialog
 + [ShareActionProvider]()-提供标准的发送邮件或者分享到社交应用的组件。
 

@@ -1,9 +1,11 @@
-## Gradle Build Files in Android
+## Gradle Build Files in Android 第一章
 
 ### Gradle for Android Basics
+
 Android applications 使用gradle构建，gradle是一门高级语言并且广泛用于java中，提供的Android插件为Android apps开发提供了很多的功能，例如build types, flavors, signing configurations, library projects，更多可查看[Android Plugin DSL Reference](http://google.github.io/android-gradle-dsl/current/index.html)
 
 #### 1.1 Gradle Build Files in Android
+
 **问题**
 
 你想理解创建Android工程生成的build file
@@ -26,7 +28,7 @@ Android Studio 是官方提供开发Android projects 的IDE，通过Android Stud
 
 **settings.gradle**
 
-Gradle 构建的Android工程是一个多项目，在`settings.gradle`中显示当前项目有哪些module。默认显示：
+Gradle 构建的Android工程是一个多项目工程，在`settings.gradle`中显示当前项目有哪些module。默认显示：
 
 		include ':app'
 
@@ -34,7 +36,7 @@ Gradle 构建的Android工程是一个多项目，在`settings.gradle`中显示�
 
 ![new library](new-module.png)
 
-则`settings.gradle`显示如下：
+则`settings.gradle`会增加`gradledemomodule`，多个项目用,隔开，显示如下：
 
 		include ':app', ':gradledemomodule'
 
@@ -63,9 +65,12 @@ Gradle 构建的Android工程是一个多项目，在`settings.gradle`中显示�
 		task clean(type: Delete) {
 		  delete rootProject.buildDir
 		}
-首先来看下`buildscript`，他是gradle脚本自身需要使用的资源，并且下载来源来自`jcenter`仓库,关于`jcenter`和`Maven`单独去了解。`jcenter`目前是默认的，他兼容了`Maven`并且性能更优。在`dependencies`中声明了我们使用的gradle版本。
-或许我们会以为`allprojects`中也同样声明了`jcenter`是否是重复了，其实不是的`allprojects`设置所有project默认的仓库来源。
-task clean声明了一个任务，任务类型是Delete(也可以是copy等)，每当修改`settings.gradle`点击同步则会删除`rootProject.buildDir`目录下所有。
+
+首先来看下`buildscript`节点，他是gradle脚本自身需要使用的资源，资源下载来自`jcenter`仓库,关于`jcenter`和`Maven`单独去了解。`jcenter`目前是默认的，他兼容了`Maven`并且性能更优。然后在`dependencies`节点中声明了我们使用的gradle版本。
+
+或许我们会以为`allprojects`中也同样声明了`jcenter`是否是重复了，其实不是的`allprojects`设置所有project默认的仓库来源，与`buildscript`作用范围是不一样的。
+
+task clean声明了一个任务，任务类型是Delete(也可以是copy等)，每当修改`settings.gradle`后同步则会删除`rootProject.buildDir`目录下所有。
 
 **app的build.gradle**
 
@@ -97,9 +102,11 @@ task clean声明了一个任务，任务类型是Delete(也可以是copy等)，�
 		  compile 'com.android.support:appcompat-v7:24.1.1'
 		}
 
-首先看到`apply plugin: 'com.android.application'`作用是把Android插件加入到当前build工程。相应的插件功能可看上一个**DSL**。
+这个目录下的build.gradle 是开发过程中最重要的，首先看到`apply plugin: 'com.android.application'`，他的作用是把Android插件加入到当前build工程，相应的插件功能可看上一个**DSL**。
+
 `android`节点则是一些Android的配置，例如app 版本，编译sdk,包名，混淆配置，多渠道等。
-`dependencies`节点是帮助我们加入到lib jar包或者直接通过仓库获取，通过上一个.gradle知道仓库是`jcenter`
+
+`dependencies`节点是帮助我们添加项目依赖，并且通过上一个.gradle知道默认仓库是`jcenter`
 
 #### 1.2 配置SDK版本以及其他
 
@@ -165,7 +172,7 @@ windows下输入`gradlew build`即可。
 
 **额外的功能和控制台标记**
 
-* 你可以使用空格分开使一次run多个task。如：
+* 使用空格分开使一次run多个task。如：
 
 			>gradlew lint hello
 
@@ -209,7 +216,7 @@ windows下输入`gradlew build`即可。
 			apply plugin: 'com.android.application'
 			   apply from: 'demo.gradle'
 
-    如果这样配置了执行是直接使用task名。
+    如果这样配置后执行是直接使用task名。
 
 * 显示 task 使用细节
 
@@ -275,21 +282,21 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
     library依赖完全的语法是 group:name:version
 
-    完全语法：
+    * 完全语法：
 
    			testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    简写语法：
+    * 简写语法：
 
     		testCompile 'junit:junit:4.12'
 
-    版本为变量的写法(不推荐)：
+    * 版本为变量的写法(不推荐)：
 
-    testCompile 'junit:junit:4.+'
+    		testCompile 'junit:junit:4.+'
 
-    只要版本大于等于4.0的都可以。
+    	只要版本大于等于4.0的都可以。
 
-	jar包依赖：
+	* jar包依赖：
 
 			dependencies {
 			compile files('libs/a.jar', 'libs/b.jar')
@@ -310,7 +317,7 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 **Transitive dependencies**
 
-传递依赖是指在项目中依赖了A，A依赖B，但是同时项目又依赖B，这种情况应该是比较常见的。
+间接依赖是指在依赖的A中同时A又依赖了B，那么依赖就会同时下载A，B到项目中。
 可在控制台执行`androidDependencies`task查看传递依赖。
 
 传递依赖默认是允许的，可以通过`transitive`关闭，例如：
@@ -319,6 +326,21 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 			runtime group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.0.1',
 			transitive: false
 			}
+
+或，只需要groovy-all本身的jar包，不需要简介依赖的。
+
+			dependencies {
+			    compile 'org.codehaus.groovy:groovy-all:2.4.4@jar'
+			}
+
+或
+
+			dependencies {
+			    compile group: 'org.codehaus.groovy', name: 'groovy-all',
+			       version: '2.4.4', ext: 'jar'
+			}
+
+如果是`aar`则把`@jar`
 
 **Excluding dependencies**
 
@@ -345,3 +367,98 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 ![dependencies_1](dependencies_1.png)
 
+同时`Dependencies`提供了6中依赖作用范围：
+
+* Compile
+
+	compile是对所有的build type以及favlors都会参与编译并且打包到最终的apk文件中。
+
+* Provided
+
+	Provided是对所有的build type以及favlors只在编译时使用，类似eclipse中的external-libs,只参与编译，不打包到最终apk。
+
+* APK
+
+	只会打包到apk文件中，而不参与编译，所以不能再代码中直接调用jar中的类或方法，否则在编译时会报错
+
+* Test compile
+
+	Test compile 仅仅是针对单元测试代码的编译编译以及最终打包测试apk时有效，而对正常的debug或者release apk包不起作用。
+
+* Debug compile
+
+	Debug compile 仅仅针对debug模式的编译和最终的debug apk打包。
+
+* Release compile
+
+	Release compile 仅仅针对Release 模式的编译和最终的Release apk打包。
+
+依赖的方式有三种，仓库依赖，文件依赖，module依赖。
+
+![dependencies_2](dependencies_2.png)
+
+#### 1.7 Configuring Repositories
+
+**问题**
+
+你想要gradle 准确的实现任何library依赖。
+
+**解决方法**
+
+配置`repositories`节点
+
+**分析**
+
+* Declaring Repositories
+
+    `repositories`中告诉gradle到哪里去找到依赖，通常我们都是使用`jcenter()`
+
+			repositories {
+			    jcenter()
+			}
+
+	jcenter 仓库在`https://jcenter.bintray.com/`
+
+	同时我们也可以使用`maven` 地址：`http://repo1.maven.org/maven2`
+
+			repositories {
+			    mavenLocal()
+			    mavenCentral()
+			}
+    
+    maven 支持在本地发布仓库，然后使用。
+
+    maven 也能通过url加载依赖。
+
+		    repositories {
+		    maven {
+		        url 'http://repo.spring.io/milestone'
+		    }
+			}
+
+	如果仓库有保护，可以使用username，password
+
+			repositories {
+		    maven {
+		        credentials {
+		            username 'username'
+		            password 'password'
+				}
+		        url 'http://repo.mycompany.com/maven2'
+		    	}
+			}
+
+	使用lvy 仓库
+
+			repositories {
+			    ivy {
+			        url 'http://my.ivy.repo'
+			    }
+			}
+
+    使用本地目录作为仓库
+
+			repositories {
+			    flatDir {
+			dirs 'lib' }
+			}
