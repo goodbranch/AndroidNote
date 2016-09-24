@@ -327,7 +327,7 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 			transitive: false
 			}
 
-或，只需要groovy-all本身的jar包，不需要简介依赖的。
+或，只需要groovy-all本身的jar包，不需要间接依赖的。
 
 			dependencies {
 			    compile 'org.codehaus.groovy:groovy-all:2.4.4@jar'
