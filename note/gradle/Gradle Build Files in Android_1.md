@@ -18,13 +18,13 @@ Android applications 使用gradle构建，gradle是一门高级语言并且广�
 
 Android Studio 是官方提供开发Android projects 的IDE，通过Android Studio 向导`Start a new Android Studio project`创建第一个项目吧。
 
-![Start a new Android Studio project](start-newproject-1.png)
+![Start a new Android Studio project](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/start-newproject-1.png)
 
 这一步就不多说了，相信大家都知道的。
 
 然后我们看到一个默认的工程是怎么样的。
 
-![default project view](default-project-view.png)
+![default project view](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/default-project-view.png)
 
 **settings.gradle**
 
@@ -34,7 +34,7 @@ Gradle 构建的Android工程是一个多项目工程，在`settings.gradle`中�
 
 如果这时我创建一个名为`gradledemomodule` 的library项目
 
-![new library](new-module.png)
+![new library](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/new-module.png)
 
 则`settings.gradle`会增加`gradledemomodule`，多个项目用,隔开，显示如下：
 
@@ -147,7 +147,7 @@ task clean声明了一个任务，任务类型是Delete(也可以是copy等)，�
 
 然后通过Generate Signed APK 可以选择多渠道，并且每个渠道都可以配置自己的信息，例如修改包名。
 
-![productFlavors](productFlavors.png)
+![productFlavors](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/productFlavors.png)
 
 这里只是简单的介绍，后面在再更加详细分析。
 
@@ -164,7 +164,7 @@ task clean声明了一个任务，任务类型是Delete(也可以是copy等)，�
 
 你不需要为了build Android project 而去下载安装gradle ，因为项目中已经配置好了。直接在Android Studio的terminal中执行。
 
-![terminal-build](terminal-build.png)
+![terminal-build](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/terminal-build.png)
 
 windows下输入`gradlew build`即可。
 
@@ -178,7 +178,7 @@ windows下输入`gradlew build`即可。
 
 	`lint`是自带的，`hello`是我自己写的，这样就会执行lint后再执行hello.
 
-	![gradlew-multiple-tasks](gradlew-multiple-tasks.png)
+	![gradlew-multiple-tasks](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/gradlew-multiple-tasks.png)
 
 	同时你会发现相同名字的task在一次执行中只会执行**一遍**。
 
@@ -252,11 +252,11 @@ windows下输入`gradlew build`即可。
 
 Android Studio 本身是带有Gradle 视图列出所有tasks.
 
-![Android Studio gradle view](android_studio_gradle_view.png)
+![Android Studio gradle view](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/android_studio_gradle_view.png)
 
 选择一个执行,双击或右键选择执行
 
-![Android Studio gradle view-run](android_studio_gradle_view_run.png)
+![Android Studio gradle view-run](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/android_studio_gradle_view_run.png)
 
 #### 1.5 添加java library
 
@@ -307,11 +307,11 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 每次更改.gradle后需要同步整个项目，通常IDE会在顶部提示：
 
-![sync_now_1](sync_now_1.png)
+![sync_now_1](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/sync_now_1.png)
 
 或
 
-![sync_now_2](sync_now_2.png)
+![sync_now_2](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/sync_now_2.png)
 
 同步时会到仓库去下载依赖包。
 
@@ -365,7 +365,7 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 打开项目设置，选择`Dependencies`
 
-![dependencies_1](dependencies_1.png)
+![dependencies_1](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/dependencies_1.png)
 
 同时`Dependencies`提供了6中依赖作用范围：
 
@@ -395,7 +395,7 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 依赖的方式有三种，仓库依赖，文件依赖，module依赖。
 
-![dependencies_2](dependencies_2.png)
+![dependencies_2](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/dependencies_2.png)
 
 #### 1.7 Configuring Repositories
 
@@ -462,3 +462,6 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 			    flatDir {
 			dirs 'lib' }
 			}
+
+
+#### [继续学习第二章](http://www.jianshu.com/p/1182b1244677)

@@ -74,7 +74,7 @@
 
 然后在build apk时可以选择需要的构建
 
-![productFlavors_1.png](productFlavors_1.png)
+![productFlavors_1.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/productFlavors_1.png)
 
 * 每一个构建中可以定义自己的属性，所有的属性基于`defaultConfig`
 
@@ -99,11 +99,11 @@
 
 	如：
 
-	![productFlavors_2.png](productFlavors_2.png)
+	![productFlavors_2.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/productFlavors_2.png)
 
 	或 不共用源码
 
-	![productFlavors_3.png](productFlavors_3.png)
+	![productFlavors_3.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/productFlavors_3.png)
 
 * 使用manifestPlaceholders
 
@@ -194,11 +194,11 @@
 
 然后build是就有2x2+1x2=6个包可以选择。
 
-![flavorDimensions_1.png](flavorDimensions_1.png)
+![flavorDimensions_1.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/flavorDimensions_1.png)
 
 定义了flavorDimensions后每一个构建都需要加上`dimension`否则报错
 
-![flavorDimensions_error_1.png](flavorDimensions_error_1.png)
+![flavorDimensions_error_1.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/flavorDimensions_error_1.png)
 
 与3.2 一样，可以设置属性，同样可以合并相同的。
 
@@ -216,10 +216,10 @@
 
 例如：
 
-![mering_java_class_1.png](mering_java_class_1.png)
+![mering_java_class_1.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/mering_java_class_1.png)
 
 可以看到`one`,`two`是组合构建
 
-![mering_java_class_2.png](mering_java_class_2.png)
+![mering_java_class_2.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/mering_java_class_2.png)
 
 所以不所有包中都会有一个`OtherActivity`，并且他们的实现方式不一样。

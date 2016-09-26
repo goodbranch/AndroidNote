@@ -69,7 +69,7 @@
 
 Android Studio自带导入向导，根据向导一步一步做。
 
-![androidstudio_from_eclipse_project](androidstudio_from_eclipse_project.png)
+![androidstudio_from_eclipse_project](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/androidstudio_from_eclipse_project.png)
 
 #### 2.3 转换Eclipse Android项目到Android Studio通过Eclipse
 
@@ -81,7 +81,7 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 右键项目`Export`->`Generate Gradle build files`->选择这个项目下的所有library->finish
 
-![project_from_eclipse](project_from_eclipse.png)
+![project_from_eclipse](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/project_from_eclipse.png)
 
 然后就会生成一个`build.gradle`
 
@@ -141,7 +141,7 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 * 或修改gradle/wrapper 目录下的.properties
 
-	![uppdate_newer_gradle_version](uppdate_newer_gradle_version.png)
+	![uppdate_newer_gradle_version](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/uppdate_newer_gradle_version.png)
 
 	更改相应的版本即可。
 
@@ -211,6 +211,8 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 #### 2.7 使用Android Studio打包
 
-![androidstudio_build_release_apk.png](androidstudio_build_release_apk.png)
+![androidstudio_build_release_apk.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/androidstudio_build_release_apk.png)
 
 如果没有keystore则根据向导创建。
+
+#### [继续学习第三章](http://www.jianshu.com/p/5e28100aadea)
