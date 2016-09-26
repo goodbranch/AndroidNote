@@ -15,48 +15,48 @@
 	例如：
 
 
-			ext {
-			  appcompat_version = '24.2.1'
-			  versionCodes=13
-			  versionNames='2.3'
-			}
+		ext {
+		  appcompat_version = '24.2.1'
+		  versionCodes=13
+		  versionNames='2.3'
+		}
 
 	使用：
 
-			defaultConfig {
-			   applicationId "com.branch.www.gradledemo"
-			   minSdkVersion 18
-			   targetSdkVersion 24
-			   versionCode versionCodes
-			   versionName versionNames
-			}
+		defaultConfig {
+		   applicationId "com.branch.www.gradledemo"
+		   minSdkVersion 18
+		   targetSdkVersion 24
+		   versionCode versionCodes
+		   versionName versionNames
+		}
 
 	或
 
-			compile("com.android.support:appcompat-v7:$appcompat_version")
+		compile("com.android.support:appcompat-v7:$appcompat_version")
 
 * 使用gradle.properties
 
 	例如在`gradle.properties`加入：
 
-			login='user'
-			pass='my_long_and_highly_complex_password'
+		login='user'
+		pass='my_long_and_highly_complex_password'
 
 	然后在`build.gradle`中使用
 
-			repositories {
-				maven {
-				url 'http://repo.mycompany.com/maven2'
-				credentials {
-				username 'user'
-				password 'password'
-				}
-			 }
+		repositories {
+			maven {
+			url 'http://repo.mycompany.com/maven2'
+			credentials {
+			username 'user'
+			password 'password'
 			}
+		 }
+		}
 
 	或你可以在控制台使用`-P`输入`login`,'password'参数给properties设值。
 
-			gradlew -Plogin=me -Ppassword=this_is_my_password assembleDebug
+		gradlew -Plogin=me -Ppassword=this_is_my_password assembleDebug
 
     
 #### 2.2 转换Eclipse Android项目到Android Studio
@@ -85,41 +85,41 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 然后就会生成一个`build.gradle`
 
-			apply plugin: 'android'
+	apply plugin: 'android'
 
-			dependencies {
-			    compile fileTree(dir: 'libs', include: '*.jar')
-			    compile project(':appcompat_v7')
-			}
+	dependencies {
+	    compile fileTree(dir: 'libs', include: '*.jar')
+	    compile project(':appcompat_v7')
+	}
 
-			android {
-			    compileSdkVersion 24
-			    buildToolsVersion "23.0.3"
+	android {
+	    compileSdkVersion 24
+	    buildToolsVersion "23.0.3"
 
-			    sourceSets {
-			        main {
-			            manifest.srcFile 'AndroidManifest.xml'
-			            java.srcDirs = ['src']
-			            resources.srcDirs = ['src']
-			            aidl.srcDirs = ['src']
-			            renderscript.srcDirs = ['src']
-			            res.srcDirs = ['res']
-			            assets.srcDirs = ['assets']
-			        }
+	    sourceSets {
+	        main {
+	            manifest.srcFile 'AndroidManifest.xml'
+	            java.srcDirs = ['src']
+	            resources.srcDirs = ['src']
+	            aidl.srcDirs = ['src']
+	            renderscript.srcDirs = ['src']
+	            res.srcDirs = ['res']
+	            assets.srcDirs = ['assets']
+	        }
 
-			        // Move the tests to tests/java, tests/res, etc...
-			        instrumentTest.setRoot('tests')
+	        // Move the tests to tests/java, tests/res, etc...
+	        instrumentTest.setRoot('tests')
 
-			        // Move the build types to build-types/<type>
-			        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-			        // This moves them out of them default location under src/<type>/... which would
-			        // conflict with src/ being used by the main source set.
-			        // Adding new build types or product flavors should be accompanied
-			        // by a similar customization.
-			        debug.setRoot('build-types/debug')
-			        release.setRoot('build-types/release')
-			    }
-			}
+	        // Move the build types to build-types/<type>
+	        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+	        // This moves them out of them default location under src/<type>/... which would
+	        // conflict with src/ being used by the main source set.
+	        // Adding new build types or product flavors should be accompanied
+	        // by a similar customization.
+	        debug.setRoot('build-types/debug')
+	        release.setRoot('build-types/release')
+	    }
+	}
 
 #### 2.4 更新Gradle 版本
 
@@ -133,10 +133,10 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 * 添加一个 `wrapper`task到build.gradle
 
-			task wrapper(type: Wrapper) {
-			  gradleVersion = 2.2
-			}
-	
+		task wrapper(type: Wrapper) {
+		  gradleVersion = 2.2
+		}
+
 	修改版本后在控制台执行`gradlew wrapper`就可以使用新的gradlew版本。
 
 * 或修改gradle/wrapper 目录下的.properties
@@ -155,11 +155,11 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 * 在顶层`build.gradle`中定义了`allprojects`节点
 
-			allprojects {
-			repositories {
-			jcenter()
-			}
-			}
+		allprojects {
+		repositories {
+		jcenter()
+		}
+		}
 
 	果在单个项目中如果没有特殊情况则不需要重复定义仓库。
 
@@ -167,9 +167,9 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 	由于gradle是多项目工程，如果使用`subprojects`则可以一起定义所有library项目设置。
 
-			subprojects {
-			apply plugin: 'com.android.library'
-			}
+		subprojects {
+		apply plugin: 'com.android.library'
+		}
 	
 	则所有library可以去掉`apply plugin`
 
@@ -183,29 +183,29 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 创建keystore，使用它签名APK。使用`signingConfigs`配置如下：
 
-			android {
-			// ... other sections ...
-			signingConfigs {
-			release {
-			keyAlias 'my_alias'
-			keyPassword 'password'
-			storeFile file('/Users/kousen/keystores/myapp.keystore')
-			storePassword 'password'
-			}
-			}
-			}
+		android {
+		// ... other sections ...
+		signingConfigs {
+		release {
+		keyAlias 'my_alias'
+		keyPassword 'password'
+		storeFile file('/Users/kousen/keystores/myapp.keystore')
+		storePassword 'password'
+		}
+		}
+		}
 
 然后在buildTypes中设置对应的签名
 
-			android {
-			// ... other sections ...
-			buildTypes {
-			release {
-			// ... other settings ...
-			signingConfig signingConfigs.release
-			}
-			}
-			}
+		android {
+		// ... other sections ...
+		buildTypes {
+		release {
+		// ... other settings ...
+		signingConfig signingConfigs.release
+		}
+		}
+		}
 
 在控制台输入`gradlew assembleRelease`则会build一个签名包到`/build/outputs/apk`目录下。
 
