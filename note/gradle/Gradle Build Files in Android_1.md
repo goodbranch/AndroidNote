@@ -317,10 +317,10 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 **Transitive dependencies**
 
-间接依赖是指在依赖的A中同时A又依赖了B，那么依赖就会同时下载A，B到项目中。
-可在控制台执行`androidDependencies`task查看传递依赖。
+间接依赖是指在依赖的A中同时A又依赖了B，那么依赖就会同时下载A，B到项目中,而如果在你的项目中你本身就依赖了B则会出现jar包冲突
+可在控制台执行`androidDependencies`task查看间接依赖。
 
-传递依赖默认是允许的，可以通过`transitive`关闭，例如：
+间接依赖默认是允许的，可以通过`transitive`关闭，例如：
 
 			dependencies {
 			runtime group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.0.1',
