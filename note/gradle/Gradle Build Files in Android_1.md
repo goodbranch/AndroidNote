@@ -112,7 +112,7 @@ task clean声明了一个任务，任务类型是Delete(也可以是copy等)，�
 
 **问题**
 
-你想要设置最低和目标Android SDK版本或者是否混淆，多渠道等。
+你想要设置最低和目标Android SDK版本或者是否混淆等。
 
 **解决方法**
 
@@ -120,36 +120,31 @@ task clean声明了一个任务，任务类型是Delete(也可以是copy等)，�
 
 **分析**
 
-例如除了上面已经配置的我们还可以加入多渠道。在`android`节点内：
+apply plugin 则告知我们可以使用Gradle DSL写法。
 
-		 flavorDimensions 'attitude', 'client'
+		apply plugin: 'com.android.application'
+			android {
+				compileSdkVersion 23
+				buildToolsVersion "23.0.3"
+					defaultConfig {
+						applicationId "com.kousenit.myandroidapp"
+						minSdkVersion 19
+						targetSdkVersion 23
+						versionCode 1
+						versionName "1.0"
+					}
+				compileOptions {
+				sourceCompatibility JavaVersion.VERSION_1_7
+				targetCompatibility JavaVersion.VERSION_1_7
+			}
+		}
 
-		  productFlavors {
-		    arrogant {
-		      dimension 'attitude'
-		      applicationId 'com.oreilly.helloworld.arrg'
-		    }
-		    friendly {
-		      dimension 'attitude'
-		      applicationId 'com.oreilly.helloworld.frnd'
-		    }
-		    obsequious {
-		      dimension 'attitude'
-		      applicationId 'com.oreilly.helloworld.obsq'
-		    }
-		    stark {
-		      dimension 'client'
-		    }
-		    wayne {
-		      dimension 'client'
-		    }
-		  }
+这些参数大多在`AndroidManifest.xml`遗弃，现在在build.gradle中使用。
 
-然后通过Generate Signed APK 可以选择多渠道，并且每个渠道都可以配置自己的信息，例如修改包名。
+![Configure_SDK_Versions_1.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/Configure_SDK_Versions_1.png)
 
-![productFlavors](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/productFlavors.png)
+![Configure_SDK_Versions_2.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/Configure_SDK_Versions_2.png)
 
-这里只是简单的介绍，后面在再更加详细分析。
 
 #### 1.3 在控制台执行gradle build 
 **问题**
