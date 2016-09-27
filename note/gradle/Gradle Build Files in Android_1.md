@@ -458,4 +458,4 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 		}
 
 
-### [第二章:从创建项目到发布](http://www.jianshu.com/p/1182b1244677)
+### [第二章:从创建项目到发布](Gradle Build Files in Android_2.md)
