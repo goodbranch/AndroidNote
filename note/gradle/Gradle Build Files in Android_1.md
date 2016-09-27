@@ -122,20 +122,20 @@ task clean声明了一个任务，任务类型是Delete(也可以是copy等)，�
 
 android节点是配置app相关的属性。
 
-			android {
-				compileSdkVersion 23
-				buildToolsVersion "23.0.3"
-					defaultConfig {
-						applicationId "com.kousenit.myandroidapp"
-						minSdkVersion 19
-						targetSdkVersion 23
-						versionCode 1
-						versionName "1.0"
-					}
-				compileOptions {
-				sourceCompatibility JavaVersion.VERSION_1_7
-				targetCompatibility JavaVersion.VERSION_1_7
-			}
+		android {
+			compileSdkVersion 23
+			buildToolsVersion "23.0.3"
+				defaultConfig {
+					applicationId "com.kousenit.myandroidapp"
+					minSdkVersion 19
+					targetSdkVersion 23
+					versionCode 1
+					versionName "1.0"
+				}
+			compileOptions {
+			sourceCompatibility JavaVersion.VERSION_1_7
+			targetCompatibility JavaVersion.VERSION_1_7
+		}
 		}
 
 这些参数大多在`AndroidManifest.xml`遗弃，现在在build.gradle中使用。
@@ -168,7 +168,7 @@ windows下输入`gradlew build`即可。
 
 * 使用空格分开使一次run多个task。如：
 
-			>gradlew lint hello
+		>gradlew lint hello
 
 	`lint`是自带的，`hello`是我自己写的，这样就会执行lint后再执行hello.
 
@@ -178,7 +178,7 @@ windows下输入`gradlew build`即可。
 
 * 使用`-x`标记排除task
 
-			>gradlew lint -x hello
+		>gradlew lint -x hello
     
     这一次执行只会执行lint而不会执行hello。
 
@@ -194,21 +194,21 @@ windows下输入`gradlew build`即可。
 
     调用 gradle 命令时,默认情况下总是会在当前目录下寻找构建文件（译者注：首先会寻找当前目录下的 build.gradle 文件,以及根据settings.gradle 中的配置寻找子项目的 build.gradle ）。 可以使用 -b 参数选择其他的构建文件,并且当你使用此参数时 settings.gradle 将不会被使用,看下面的例子:
 
-		    app/demo.gradle
+	    app/demo.gradle
 
-				task demohello <<{
+			task demohello <<{
 
-				println "hello demo gradle"
-		    }
+			println "hello demo gradle"
+	    }
 
     在app目录下我又创建了一个`demo.gradle`,如果想要执行`demo.gradle`中的task可以使用`-b`，如：
 
-			gradlew -b app/demo.gradle demohello
+		gradlew -b app/demo.gradle demohello
 
 	如果不想使用`-b` 可以使用`apply`把`demo.gradle`加入到当前build.gradle
 
-			apply plugin: 'com.android.application'
-			   apply from: 'demo.gradle'
+		apply plugin: 'com.android.application'
+		   apply from: 'demo.gradle'
 
     如果这样配置后执行是直接使用task名。
 
@@ -216,21 +216,21 @@ windows下输入`gradlew build`即可。
 
     执行 `gradle help --task someTask` 可以获取到 task 的详细信息， 或者多项目构建中相同 task 名称的所有 task 的信息,如下
 
-			Detailed task information for demohello
-				                     
-			Path                 
-				 :app:demohello  
-				                     
-			Type                 
-				 Task (org.gradle.api.Task)
-				                     
-			Description          
-				 -               
-				                     
-			Group                
-				 -               
-				                     
-		    BUILD SUCCESSFUL
+		Detailed task information for demohello
+			                     
+		Path                 
+			 :app:demohello  
+			                     
+		Type                 
+			 Task (org.gradle.api.Task)
+			                     
+		Description          
+			 -               
+			                     
+		Group                
+			 -               
+			                     
+	    BUILD SUCCESSFUL
 
 #### 1.4 使用Android Studio执行Gradle Builds
 
@@ -266,11 +266,11 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 默认的dependencies
 
-			dependencies {
-			  compile fileTree(dir: 'libs', include: ['*.jar'])
-			  testCompile 'junit:junit:4.12'
-			  compile 'com.android.support:appcompat-v7:24.1.1'
-			}
+		dependencies {
+		  compile fileTree(dir: 'libs', include: ['*.jar'])
+		  testCompile 'junit:junit:4.12'
+		  compile 'com.android.support:appcompat-v7:24.1.1'
+		}
 
 * dependencies基本语法
 
@@ -278,24 +278,24 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
     * 完全语法：
 
-   			testCompile group: 'junit', name: 'junit', version: '4.12'
+		testCompile group: 'junit', name: 'junit', version: '4.12'
 
     * 简写语法：
 
-    		testCompile 'junit:junit:4.12'
+		testCompile 'junit:junit:4.12'
 
     * 版本为变量的写法(不推荐)：
 
-    		testCompile 'junit:junit:4.+'
+		testCompile 'junit:junit:4.+'
 
     	只要版本大于等于4.0的都可以。
 
 	* jar包依赖：
 
-			dependencies {
-			compile files('libs/a.jar', 'libs/b.jar')
-			compile fileTree(dir: 'libs', include: '*.jar')
-			}
+		dependencies {
+		compile files('libs/a.jar', 'libs/b.jar')
+		compile fileTree(dir: 'libs', include: '*.jar')
+		}
 
 **Synchronizing the project**
 
@@ -316,23 +316,23 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 间接依赖默认是允许的，可以通过`transitive`关闭，例如：
 
-			dependencies {
-			runtime group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.0.1',
-			transitive: false
-			}
+		dependencies {
+		runtime group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.0.1',
+		transitive: false
+		}
 
 或，只需要groovy-all本身的jar包，不需要间接依赖的。
 
-			dependencies {
-			    compile 'org.codehaus.groovy:groovy-all:2.4.4@jar'
-			}
+		dependencies {
+		    compile 'org.codehaus.groovy:groovy-all:2.4.4@jar'
+		}
 
 或
 
-			dependencies {
-			    compile group: 'org.codehaus.groovy', name: 'groovy-all',
-			       version: '2.4.4', ext: 'jar'
-			}
+		dependencies {
+		    compile group: 'org.codehaus.groovy', name: 'groovy-all',
+		       version: '2.4.4', ext: 'jar'
+		}
 
 如果是`aar`则把`@jar`换成@aar。
 
@@ -340,10 +340,10 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
 如果一个library中有我们不需要的包，则可以通过`exclude`移除。
 
-			androidTestCompile('com.android.support:appcompat-v7:24.1.1') {
-			exclude group: 'support-vector-drawable'
-			exclude group: 'animated-vector-drawable'
-			}
+		androidTestCompile('com.android.support:appcompat-v7:24.1.1') {
+		exclude group: 'support-vector-drawable'
+		exclude group: 'animated-vector-drawable'
+		}
 
 #### 1.6 通过Android Studio 添加依赖包
 
@@ -407,55 +407,55 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 
     `repositories`中告诉gradle到哪里去找到依赖，通常我们都是使用`jcenter()`
 
-			repositories {
-			    jcenter()
-			}
+		repositories {
+		    jcenter()
+		}
 
 	jcenter 仓库在`https://jcenter.bintray.com/`
 
 	同时我们也可以使用`maven` 地址：`http://repo1.maven.org/maven2`
 
-			repositories {
-			    mavenLocal()
-			    mavenCentral()
-			}
+		repositories {
+		    mavenLocal()
+		    mavenCentral()
+		}
     
     maven 支持在本地发布仓库，然后使用。
 
     maven 也能通过url加载依赖。
 
-		    repositories {
-		    maven {
-		        url 'http://repo.spring.io/milestone'
-		    }
-			}
+	    repositories {
+	    maven {
+	        url 'http://repo.spring.io/milestone'
+	    }
+		}
 
 	如果仓库有保护，可以使用username，password
 
-			repositories {
-		    maven {
-		        credentials {
-		            username 'username'
-		            password 'password'
-				}
-		        url 'http://repo.mycompany.com/maven2'
-		    	}
+		repositories {
+	    maven {
+	        credentials {
+	            username 'username'
+	            password 'password'
 			}
+	        url 'http://repo.mycompany.com/maven2'
+	    	}
+		}
 
 	使用lvy 仓库
 
-			repositories {
-			    ivy {
-			        url 'http://my.ivy.repo'
-			    }
-			}
+		repositories {
+		    ivy {
+		        url 'http://my.ivy.repo'
+		    }
+		}
 
     使用本地目录作为仓库
 
-			repositories {
-			    flatDir {
-			dirs 'lib' }
-			}
+		repositories {
+		    flatDir {
+		dirs 'lib' }
+		}
 
 
-#### [继续学习第二章](http://www.jianshu.com/p/1182b1244677)
+### [第二章:从创建项目到发布](http://www.jianshu.com/p/1182b1244677)

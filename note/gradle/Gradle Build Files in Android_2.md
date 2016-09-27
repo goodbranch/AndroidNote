@@ -215,4 +215,4 @@ Android Studio自带导入向导，根据向导一步一步做。
 
 如果没有keystore则根据向导创建。
 
-#### [继续学习第三章](http://www.jianshu.com/p/5e28100aadea)
+#### [继续学习第三章](Gradle Build Files in Android_3.md)

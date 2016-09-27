@@ -223,3 +223,5 @@
 ![mering_java_class_2.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/mering_java_class_2.png)
 
 所以不所有包中都会有一个`OtherActivity`，并且他们的实现方式不一样。从main中的`MainActivity` 实现startActivity时，不同构建跳转到对应的构建。应该在每一个构建中自己的实现也就实现完全不一样。
+
+### [第一章:gradle的基础](Gradle Build Files in Android_1.md)
