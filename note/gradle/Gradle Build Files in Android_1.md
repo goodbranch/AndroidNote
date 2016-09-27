@@ -132,9 +132,10 @@ android节点是配置app相关的属性。
 					versionCode 1
 					versionName "1.0"
 				}
+				
 			compileOptions {
-			sourceCompatibility JavaVersion.VERSION_1_7
-			targetCompatibility JavaVersion.VERSION_1_7
+				sourceCompatibility JavaVersion.VERSION_1_7
+				targetCompatibility JavaVersion.VERSION_1_7
 		}
 		}
 
@@ -293,9 +294,13 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 	* jar包依赖：
 
 		dependencies {
-		compile files('libs/a.jar', 'libs/b.jar')
-		compile fileTree(dir: 'libs', include: '*.jar')
+			compile files('libs/a.jar', 'libs/b.jar')
+			compile fileTree(dir: 'libs', include: '*.jar')
 		}
+
+	* module 依赖
+
+		compile project(':gradledemomodule')
 
 **Synchronizing the project**
 
@@ -341,8 +346,8 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 如果一个library中有我们不需要的包，则可以通过`exclude`移除。
 
 		androidTestCompile('com.android.support:appcompat-v7:24.1.1') {
-		exclude group: 'support-vector-drawable'
-		exclude group: 'animated-vector-drawable'
+			exclude group: 'support-vector-drawable'
+			exclude group: 'animated-vector-drawable'
 		}
 
 #### 1.6 通过Android Studio 添加依赖包
