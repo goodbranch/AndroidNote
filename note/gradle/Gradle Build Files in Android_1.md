@@ -120,9 +120,8 @@ task clean声明了一个任务，任务类型是Delete(也可以是copy等)，�
 
 **分析**
 
-apply plugin 则告知我们可以使用Gradle DSL写法。
+android节点是配置app相关的属性。
 
-		apply plugin: 'com.android.application'
 			android {
 				compileSdkVersion 23
 				buildToolsVersion "23.0.3"
@@ -335,7 +334,7 @@ Android Studio 本身是带有Gradle 视图列出所有tasks.
 			       version: '2.4.4', ext: 'jar'
 			}
 
-如果是`aar`则把`@jar`
+如果是`aar`则把`@jar`换成@aar。
 
 **Excluding dependencies**
 
