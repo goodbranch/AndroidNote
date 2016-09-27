@@ -46,10 +46,10 @@
 
 		repositories {
 			maven {
-			url 'http://repo.mycompany.com/maven2'
-			credentials {
-			username 'user'
-			password 'password'
+				url 'http://repo.mycompany.com/maven2'
+				credentials {
+				username 'user'
+				password 'password'
 			}
 		 }
 		}
@@ -156,9 +156,9 @@ Android Studio自带导入向导，根据向导一步一步做。
 * 在顶层`build.gradle`中定义了`allprojects`节点
 
 		allprojects {
-		repositories {
-		jcenter()
-		}
+			repositories {
+				jcenter()
+			}
 		}
 
 	果在单个项目中如果没有特殊情况则不需要重复定义仓库。
@@ -168,7 +168,7 @@ Android Studio自带导入向导，根据向导一步一步做。
 	由于gradle是多项目工程，如果使用`subprojects`则可以一起定义所有library项目设置。
 
 		subprojects {
-		apply plugin: 'com.android.library'
+			apply plugin: 'com.android.library'
 		}
 	
 	则所有library可以去掉`apply plugin`
@@ -184,27 +184,27 @@ Android Studio自带导入向导，根据向导一步一步做。
 创建keystore，使用它签名APK。使用`signingConfigs`配置如下：
 
 		android {
-		// ... other sections ...
-		signingConfigs {
-		release {
-		keyAlias 'my_alias'
-		keyPassword 'password'
-		storeFile file('/Users/kousen/keystores/myapp.keystore')
-		storePassword 'password'
-		}
-		}
+			// ... other sections ...
+			signingConfigs {
+				release {
+					keyAlias 'my_alias'
+					keyPassword 'password'
+					storeFile file('/Users/kousen/keystores/myapp.keystore')
+					storePassword 'password'
+				}
+			}
 		}
 
 然后在buildTypes中设置对应的签名
 
 		android {
-		// ... other sections ...
-		buildTypes {
-		release {
-		// ... other settings ...
-		signingConfig signingConfigs.release
-		}
-		}
+			// ... other sections ...
+			buildTypes {
+				release {
+					// ... other settings ...
+					signingConfig signingConfigs.release
+				}
+			}
 		}
 
 在控制台输入`gradlew assembleRelease`则会build一个签名包到`/build/outputs/apk`目录下。
