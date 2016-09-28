@@ -58,7 +58,19 @@
 
 		gradlew -Plogin=me -Ppassword=this_is_my_password assembleDebug
 
+	然后可以打印查看
+
+		task printProperties() {
+			doLast {
+				println "username=$login"
+				println "password=$pass"
+			}
+		}
     
+    然后在这次执行中对应的login,pass都是通过控制台输入的。
+
+    	gradlew -Puser=user_from_pflag -Ppass=pass_from_pflag printProperties
+
 #### 2.2 转换Eclipse Android项目到Android Studio
 
 **问题**
