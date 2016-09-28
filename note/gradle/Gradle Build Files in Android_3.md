@@ -192,7 +192,7 @@
 	      dimension "two"
 	    }
 
-然后build是就有2x2+1x2=6个包可以选择。
+然后build是就有2x2+2x1=6个包可以选择。
 
 ![flavorDimensions_1.png](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/flavorDimensions_1.png)
 
