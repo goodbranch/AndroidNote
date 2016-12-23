@@ -2,16 +2,18 @@
 
 > 开发中我们频繁使用Layout Preview ,但是发现还有很多没有利用起来，导致使用上有很多问题，例如我们开发过程中设置的一些String ,Src 不能保证提交前一定删除干净了，然而删除赶紧了对下一次开发又不方便，那么怎么高效使用呢，解决下面几个问题就能高效使用了：
 
-> * 页面看上去一片空白
+> * [页面看上去一片空白](#empty_layout)
 
-> * 动态改变控件
+> * [动态改变控件](#dynamic)
 
-> * 自定义控件预览报错问题
+> * [自定义控件预览报错问题](#error)
 
-> * `<merge> layout` 不能渲染问题
+> * [`<merge> layout` 不能渲染问题](#merge)
+
+> * [更加详细请看官方文档](#more)
 
 
-##### 1. 页面看起来一片空白
+##### 1. 页面看起来一片空白<a name="empty_layout"/>
 
 > 这一点在看别人代码时最常遇见，点开它的布局文件想要第一时间知道大致的布局我们都会点到design,理想状态是能立马看到布局，但是结果往往是这样的：
 
@@ -33,15 +35,15 @@
 
 ![实际运行效果](preview_3.png)
 
-##### 2. 动态改变控件
+##### 2. 动态改变控件<a name="dynamic"/>
 
 > 有了上面的经验后就知道想要测试则使用`tools`，那么例如TextView，ImageView，ListView等等，所有他们的属性都可以通过tools测试。
 
-##### 3. 自定义控件预览报错问题
+##### 3. 自定义控件预览报错问题<a name="error"/>
 
 > 
 
-##### 4. `<merge> layout` 不能渲染问题
+##### 4. `<merge> layout` 不能渲染问题<a name="merge"/>
 
 > 为了减少布局层级，是很有必要使用`merge`，但是使用之后我们也遇到渲染时不方便查看的问题，那么怎么解决呢？使用`tools:parentTag="LinearLayout"`吧。
 
@@ -63,6 +65,6 @@
 > `tools:parentTag="xx"` 可以设置所有的系统控件，`LinearLayout`,`FrameLayout`,`ReleativeLayout`
 
 
-##### 5.更加详细请看官方文档
+##### 5.更加详细请看官方文档<a name="more"/>
 
 [](https://developer.android.com/studio/write/tool-attributes.html)
