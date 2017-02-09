@@ -179,3 +179,6 @@ project.extensions.create(...,...); 前面是Name，后面是Model,model中在gr
 
 
 #### 所有这些配置正确后同步项目可在Gradle Console查看到日志
+
+
+#### [github demo](https://github.com/goodbranch/Android-GradlePlugin-Demo/tree/master)
