@@ -12,11 +12,11 @@
 
 * 为了方便测试先创建一个Android 工程，然后创建一个Android library Module工程
 
-![创建module](module-1.png)
+![创建module](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/module-1.png)
 
 * 删除如图中箭头所指目录和文件
 
-![删除无效目录](module-2.png)
+![删除无效目录](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/module-2.png)
 
 * `build.gradle`中改成groovy方式
 
@@ -33,7 +33,7 @@
 
 #### 以删除log日志为例
 
-![Groovy 项目结构](groovy-project.png)
+![Groovy 项目结构](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/groovy-project.png)
 
 #### 1.继承 gradle`Plugin`，类的后缀不再是.java而是.groovy
 
@@ -73,7 +73,7 @@
 `afterEvaluate`是在gradle构建完后自动执行的，但task需要手动执行
 一个插件中可以创建多个Task,如代码中的`dellog`，可以在控制台执行`gradle -q dellog`，也可以在gradle图形界面执行
 
-![图形界面执行task](gradle-task-ui.png)
+![图形界面执行task](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/gradle-task-ui.png)
 
 #### 2. 创建可以输入的Gradle 插件
 
@@ -106,7 +106,7 @@ project.extensions.create(...,...); 前面是Name，后面是Model,model中在gr
 	  sourceDir = '/src'
 	}
 
-![使用输入](use-extension.png)
+![使用输入](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/use-extension.png)
 
 
 ### 3. 在main下创建`resources`目录
@@ -147,11 +147,11 @@ project.extensions.create(...,...); 前面是Name，后面是Model,model中在gr
 
 这里设置发布到上一个目录的`repo`中,同时可以查看gradle task中有一个名为uploadArchives的task
 
-![发布到本地task](maven-local-task.png)
+![发布到本地task](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/maven-local-task.png)
 
 执行就能在`repo`中查看到相应jar包
 
-![查看本地仓库](maven-local-resuslt.png)
+![查看本地仓库](https://raw.githubusercontent.com/goodbranch/AndroidNote/master/note/gradle/maven-local-resuslt.png)
 
 ### 5. 使用本地仓库
 

@@ -14,4 +14,5 @@
 ### [11.Glide使用](note/glide/Glide使用.md)
 ### [12.gradle task删除log日志](note/log/gradle task删除log日志.md)
 ### [13.Gradle Build Files in Android](note/gradle/Gradle Build Files in Android.md)
+### [14.自定义Gradle Plugin](note/gradle/Android Gradle Plugin.md)
 
