@@ -285,4 +285,105 @@
 ### 4.1 JAVA jdk 提供了大量工具
 
 * 主要是在bin目录下的可执行文件
-		
+
+### 4.2 JDK的命令行工具
+
+* jps(JVM Process Status Tool) 列出正在运行的虚拟机进程，并显示虚拟机执行主类名称以及这些进程的本地虚拟机唯一ID。
+
+* jstat:虚拟机统计信息监控工具
+
+* jinfo:Java配置信息工具
+
+* jmap:Java内存映像工具
+
+* jhat:虚拟机堆转储快照分析工具
+
+* jstack:Java堆栈跟踪工具
+
+* HSDIS:jit生成代码反编译
+
+### 4.3 JDK的可视化工具
+
+* JConsole:Java监视与管理控制台
+
+* VisualVM:多合一故障处理工具
+
+	* HotSwap通过不停止HotSpot运行，动态添加调试代码.
+
+## 第5章 调优案例分析与实战
+
+## 第6章 类文件结构
+
+### 6.2 无关性的基石
+
+* 使用字节码格式，一次编译到处运行
+
+### 6.3 Class类文件的结构
+
+* 任何一个Class文件都对应着唯一一个类或接口的定义信息。
+
+* Class文件格式采用一种类似于C语言结构体的伪结构来存储数据，无符号和表。
+
+*无符号属于基本数据类型，以 u1,u2,u4,u8 代表1个字节，2个字节，4个字节，8个字节。
+
+* 表是由多个无符号或者其他表作为数据项构成的符合数据类型，所有表都习惯以`_info`结尾。
+
+* Class文件格式
+
+	|类型|名称|数量|
+	|!------!|!------!|!------!|
+	|u4|magic|1|
+	|u2|minor_version|1|
+	|u2|major_version|1|
+	|u2|constant_pool_count|1|
+	|cp_info|constant_pool|constant_pool_count-1|
+	|u2|access_flags|1|
+	|u2|this_class|1|
+	|u2|super_class|1|
+	|u2|interfaces_count|1|
+	|u2|interfaces|interface_count|
+	|u2|fields_count|1|
+	|field_count|fields|fields_count|
+	|u2|methods_count|1|
+	|method_info|methods|methods_count|
+	|u2|attribute_count|1|
+	|attribute_info|attributes|attributes_count|、
+
+	* Class文件的格式被严格控制顺序与占字节数
+			
+* 魔数与Class文件的版本
+
+	* 每个Class文件的头4个字节称为魔数，他的作用是确定这个文件是否为一个能被虚拟机接受的Class文件。
+
+	* Minor Version次版本号，Major Version主版本号，
+
+		* 不同版本jdk能支持的版本不一样。
+
+	* 可以使用`WinHex`十六进制编辑器查看Class文件
+
+* 常量池
+	
+	* 常量池大小是不确定的
+
+	* 在constant_pool_count指定常量的数量。
+
+	* 常量池的容量计数从1开始
+
+	常量池主要存放两大类常量
+
+	* 字面量：文本字符串，声明为final的常量值等。
+
+	* 符号引用：
+
+* 访问标记
+
+> 标记是类还是接口，是否定义为public，abstract等
+
+* 类索引，父类索引与接口索引集合
+
+	* 这三项确定类继承关系
+
+* 字段表集合
+
+	* 用于描述接口或者类中声明的变量
+
