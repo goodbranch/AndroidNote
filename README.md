@@ -15,7 +15,7 @@
 
 [6.Android6.0及以上权限处理](note/Android6.0及以上权限处理.md)
 
-[7.Android 媒体库图片，音频，视频，文件的查询](note/Android 媒体库图片，音频，视频，文件的查询.md)
+[7.Android 媒体库图片/音频/视频/文件的查询](note/Android 媒体库图片，音频，视频，文件的查询.md)
 
 [8.使用AsyncTaskLoader加载数据](note/使用AsyncTaskLoader加载数据.md)
 
@@ -30,4 +30,7 @@
 [13.Gradle Build Files in Android](note/gradle/Gradle Build Files in Android.md)
 
 [14.自定义Gradle Plugin](note/gradle/Android Gradle Plugin.md)
+
+[15.高效使用Layout Preview的建议](note/layoutpreview/高效使用Layout Preview的建议.md)
+
 
