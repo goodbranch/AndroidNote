@@ -5,8 +5,9 @@
 
 markdown 格式
 
+
 |序号|标题|作者|时间|
-|!------!|!------!|!------!|!------!|
+|---|---|---|---|
 |1   |[Android开发常用工具方法汇总](note/Android开发中一些常用的工具方法.md)  |branch |2016-07-06 |
 |2   |[Jpush，友盟，百度云，个推，小米华为推送保活对比](note/JPush，友盟，百度云，个推Push服务在保活上的对比.md)  |branch |2016-07-16 |
 |3   |[Android轮播图的实现](note/LoopSwitch/LoopSwitch.md)  |branch |2016-08-05 |
