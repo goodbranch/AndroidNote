@@ -23,7 +23,7 @@ markdown 格式
 |13  |[Gradle Build Files in Android](note/gradle/Gradle_Build_Files_in_Android.md)  |branch |2016-11-15 |
 |14  |[自定义Gradle Plugin](note/gradle/Android_Gradle_Plugin.md)  |branch |2016-12-20 |
 |15  |[高效使用Layout Preview的建议](note/layoutpreview/efficient_use_tools_attrbute.md)  |branch |2017-04-13 |
-|16  |[Android Apk V2签名分析与快速渠道包写入](note\apk-signature-v2-channel\AndroidV2SignatureChannelTool.md)  |branch |2017-10-25 |
+|16  |[Android Apk V2签名分析与快速渠道包写入](note/apk-signature-v2-channel/AndroidV2SignatureChannelTool.md)  |branch |2017-10-25 |
 
 
 
